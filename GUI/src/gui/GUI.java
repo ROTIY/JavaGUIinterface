@@ -10,6 +10,7 @@ public class GUI {
     private JRadioButton ckRabbit;
     private JRadioButton ckPig;
     private ButtonGroup animalGroup;
+    private JButton CheckButton;
     public GUI(){
         
         
@@ -56,10 +57,21 @@ public class GUI {
         checkboxPanel.add(ckPig);
         checkboxPanel.add(Box.createVerticalStrut(20));
 
-       JButton CheckButton = new JButton("Submit");
+       CheckButton = new JButton("Submit");
        CheckButton.setFont(new Font("Segoe UI", Font.PLAIN, 16));
        
        checkboxPanel.add(CheckButton);
+       
+       CheckButton.addActionListener(
+               e ->{
+                   String Selected =getSelectedAnimal();
+                   if (Selected != null){
+                       JOptionPane.showMessageDialog(checkboxPanel, "You selected: " + Selected + "!","Animal Chosen",JOptionPane.INFORMATION_MESSAGE);
+                   }else{
+                       JOptionPane.showMessageDialog(checkboxPanel, "You have not selected any animal","Animal Chosen",JOptionPane.INFORMATION_MESSAGE);
+                   }
+               }
+       );
         
         JLabel imageLabel = new JLabel();
         imageLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -88,14 +100,7 @@ public class GUI {
         frame.setVisible(true);
     }
     
-    public String SelectedAnimal(){
-        if(ckBird.isSelected()) return "Bird";
-        if(ckCat.isSelected()) return "Cat";
-        if(ckDog.isSelected()) return "Dog";
-        if(ckRabbit.isSelected()) return "Rabbit";
-        if(ckDog.isSelected()) return "Dog";
-        return null;
-    }
+    
     
     private String getSelectedAnimal() {
     for (java.util.Enumeration<AbstractButton> buttons = animalGroup.getElements(); 
@@ -111,9 +116,6 @@ public class GUI {
     public static void main(String[] args) {
         // TODO code application logic here
         GUI AnimalCheck = new GUI();
-        while (true) {
-            System.out.println(AnimalCheck.getSelectedAnimal());
-        }
         
         
         
